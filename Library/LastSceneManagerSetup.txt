@@ -1,4 +1,1 @@
-sceneSetups:
-- path: C:/Users/Public/Documents/Unity Projects/test conspept/Assets/Prototype.unity
-  isLoaded: 1
-  isActive: 1
+sceneSetups: []
