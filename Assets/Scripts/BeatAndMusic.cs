@@ -34,5 +34,13 @@ public class BeatAndMusic : MonoBehaviour
 
             beatTimer = 0f;
         }
+
+        if(Dimension.is2D())
+        {
+
+        }else if(Dimension.is3D())
+        {
+
+        }
     }
 }
