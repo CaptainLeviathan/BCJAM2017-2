@@ -22,10 +22,12 @@ public class BeatAndMusic : MonoBehaviour {
         
         if(beatTimer >= beatDuration)
         {
+            Debug.Log("beat start");
             GameObject[] BeatListers = GameObject.FindGameObjectsWithTag("BeatListener");
 
             for(int i =0; i < BeatListers.Length; ++i)
             {
+                Debug.Log("beat sent:" + i);
                 BeatListers[i].SendMessage("Beat", SendMessageOptions.DontRequireReceiver);
             }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - spiner
   - Wall
+  - BeatListener
   layers:
   - Default
   - TransparentFX
