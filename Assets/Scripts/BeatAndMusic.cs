@@ -11,7 +11,8 @@ public class BeatAndMusic : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float voulum;
 
-    float startOffSet = 0f;
+    public float beatStartOffSet = 0f;
+    public float musicStartOffSet = 0f;
     float beatDuration;
     float beatTimer;
     float VolumBias = 1f;
@@ -26,27 +27,14 @@ public class BeatAndMusic : MonoBehaviour
         beatDuration = 1 / (BPM / 60);
         player2D.volume = voulum;
         player3D.volume = 0;
+        StartCoroutine(waiter());
+        player2D.PlayDelayed(musicStartOffSet);
+        player3D.PlayDelayed(musicStartOffSet);
     }
 
     // Update is called once per frame
     void Update()
     {
-        beatTimer += Time.deltaTime;
-
-        if (beatTimer >= beatDuration)
-        {
-            Debug.Log("beat start");
-            GameObject[] BeatListers = GameObject.FindGameObjectsWithTag("BeatListener");
-
-            for (int i = 0; i < BeatListers.Length; ++i)
-            {
-                Debug.Log("beat sent:" + i);
-                BeatListers[i].SendMessage("Beat", SendMessageOptions.DontRequireReceiver);
-            }
-
-            beatTimer = 0f;
-        }
-
         if(Dimension.is2D())
         {
             VolumBias += fadeSpeed2D3D * Time.deltaTime;
@@ -57,6 +45,28 @@ public class BeatAndMusic : MonoBehaviour
         }
 
         fade();
+    }
+
+    IEnumerator waiter ()
+    {
+        yield return new WaitForSeconds(beatStartOffSet);
+        StartCoroutine(beater());
+    }
+
+    IEnumerator beater()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(beatDuration);
+            Debug.Log("beat start");
+            GameObject[] BeatListers = GameObject.FindGameObjectsWithTag("BeatListener");
+
+            for (int i = 0; i < BeatListers.Length; ++i)
+            {
+                Debug.Log("beat sent:" + i);
+                BeatListers[i].SendMessage("Beat", SendMessageOptions.DontRequireReceiver);
+            }
+        }
     }
 
     void fade()

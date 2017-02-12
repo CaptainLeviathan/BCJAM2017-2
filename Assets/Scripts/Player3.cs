@@ -18,10 +18,18 @@ public class Player3 : MonoBehaviour {
     public float multCoolDown = 4f;
     public float deathDelay = 1f;
 
+    public float numDeathVisara;
+    public float visaraForwardForce;
+    public float visaraSpreadForce;
+
+    public GameObject Visara;
+
     public GameObject deathText;
 
     public AudioClip deathSound;
     public AudioClip multBostSound;
+
+    Transform[] children;
 
     float distToGround;
     float oldZ = 0f;
@@ -29,11 +37,15 @@ public class Player3 : MonoBehaviour {
     float score;
     float multTimer;
 
+    bool isDead;
+
     MeshRenderer DTextRend;
 
     // Use this for initialization
     void Start ()
     {
+        isDead = false;
+
         Dimension.set2D();
 
         multiplyer = 1;
@@ -47,7 +59,8 @@ public class Player3 : MonoBehaviour {
 
         distToGround = GetComponent<CapsuleCollider>().bounds.extents.y;
 
-        playClip(deathSound);
+        children = GetComponentsInChildren<Transform>();
+
     }
 	
 	// Update is called once per frame
@@ -57,20 +70,24 @@ public class Player3 : MonoBehaviour {
         velocity = rigBod.velocity;
         position = transform.position;
 
-        if (Dimension.is2D())
+        if (!isDead)
         {
-            update2D();
+            Debug.Log("update");
+
+            if (Dimension.is2D())
+            {
+                update2D();
+            }
+            else if (Dimension.is3D())
+            {
+                update3D();
+            }
+
+            //making us move foward
+            velocity.x = speed;
+
+            updateScore();
         }
-
-        else if (Dimension.is3D())
-        {
-            update3D();
-        }
-
-        //making us move foward
-        velocity.x = speed;
-
-        updateScore();
 
         transform.position = position;
         rigBod.velocity = velocity;
@@ -177,9 +194,26 @@ public class Player3 : MonoBehaviour {
 
     IEnumerator Death()
     {
-        Debug.Log("DeathDelay:" + deathDelay);
+        isDead = true;
         playClip(deathSound);
-        DTextRend.enabled = true;
+
+        GetComponent<MeshRenderer>().enabled = false;
+
+        for(int i = 0; i < children.Length; ++i)
+        {
+            if (children[i].GetComponent<Rigidbody>() != null)
+            {
+                children[i].GetComponent<Rigidbody>().isKinematic = false;
+                children[i].GetComponent<Rigidbody>().AddForce(new Vector3(visaraForwardForce, Random.Range(-visaraSpreadForce, visaraSpreadForce), Random.Range(0f, 2 * visaraSpreadForce)));
+                children[i].parent = null;
+            }
+        }
+        for(int i = 0; i < numDeathVisara; ++i)
+        {
+            Instantiate(Visara, new Vector3(transform.position.x, transform.position.y + Random.Range(-0.5f, 0.5f), transform.position.z + Random.Range(-0.5f, 0.5f)), transform.rotation).transform.GetComponent<Rigidbody>().AddForce(new Vector3(visaraForwardForce,Random.Range(-visaraSpreadForce, visaraSpreadForce), Random.Range(0f, 2 * visaraSpreadForce)));
+        }
+
+
         GameObject.FindGameObjectWithTag("Music And Beat").GetComponent<BeatAndMusic>().mute();
         yield return new WaitForSeconds(deathDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -439,7 +439,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f92286f285404b245b92cef5d02042f5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -519,7 +519,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8bf4f8cebb2849547a0419fb1bada2bb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -602,7 +602,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BPM: 120
   fadeSpeed2D3D: 2
-  voulum: 0.27
+  voulum: 0.01
+  beatStartOffSet: 1
+  musicStartOffSet: 0
   player2D: {fileID: 1535787165}
   player3D: {fileID: 1535787166}
 --- !u!1 &1929115923
@@ -620,7 +622,6 @@ GameObject:
   - component: {fileID: 1929115931}
   - component: {fileID: 1929115932}
   - component: {fileID: 1929115928}
-  - component: {fileID: 1929115930}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -711,7 +712,10 @@ MonoBehaviour:
   slideBounds: 11
   multCoolDown: 4
   deathDelay: 2
-  Audio: {fileID: 1929115930}
+  numDeathVisara: 6
+  visaraForwardForce: 1
+  visaraSpreadForce: 0
+  Visara: {fileID: 1026920388996648, guid: 94f55dd51c589844d8914882cf1ab34b, type: 2}
   deathText: {fileID: 1391006479}
   deathSound: {fileID: 8300000, guid: e27380de8ce47c2489a4570d8fe88b08, type: 3}
   multBostSound: {fileID: 8300000, guid: 83f9ae68625300342a35f1b15b5aa7af, type: 3}
@@ -730,134 +734,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!82 &1929115930
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1929115923}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e27380de8ce47c2489a4570d8fe88b08, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: -2.4
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 2
-  BypassEffects: 1
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0.002
-      value: 1.1
-      inSlope: -500.20065
-      outSlope: -500.20065
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.004
-      value: 0.6
-      inSlope: -125.05016
-      outSlope: -125.05016
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.008
-      value: 0.35
-      inSlope: -31.26254
-      outSlope: -31.26254
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.016
-      value: 0.225
-      inSlope: -7.815635
-      outSlope: -7.815635
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.032
-      value: 0.1625
-      inSlope: -1.9539088
-      outSlope: -1.9539088
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.064
-      value: 0.13125
-      inSlope: -0.4884772
-      outSlope: -0.4884772
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.128
-      value: 0.115625
-      inSlope: -0.1221193
-      outSlope: -0.1221193
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.256
-      value: 0.1078125
-      inSlope: -0.030529825
-      outSlope: -0.030529825
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.512
-      value: 0.10390625
-      inSlope: -0.0076324563
-      outSlope: -0.0076324563
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0.102
-      inSlope: -0.002000801
-      outSlope: -0.002000801
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!65 &1929115931
 BoxCollider:
   m_ObjectHideFlags: 0
