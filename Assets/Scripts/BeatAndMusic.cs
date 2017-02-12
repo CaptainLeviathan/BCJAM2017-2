@@ -8,6 +8,9 @@ public class BeatAndMusic : MonoBehaviour
     public float BPM = 120f;
     public float fadeSpeed2D3D;
 
+    [Range(0.0f, 1.0f)]
+    public float voulum;
+
     float startOffSet = 0f;
     float beatDuration;
     float beatTimer;
@@ -21,7 +24,8 @@ public class BeatAndMusic : MonoBehaviour
     void Start()
     {
         beatDuration = 1 / (BPM / 60);
-
+        player2D.volume = voulum;
+        player3D.volume = 0;
     }
 
     // Update is called once per frame
@@ -66,7 +70,12 @@ public class BeatAndMusic : MonoBehaviour
             VolumBias = 0;
         }
 
-        player2D.volume = VolumBias;
-        player3D.volume = 1 - VolumBias;
+        player2D.volume = (VolumBias) * voulum;
+        player3D.volume = (1 - VolumBias) * voulum;
+    }
+
+    public void mute()
+    {
+        voulum = 0;
     }
 }

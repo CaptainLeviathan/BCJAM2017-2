@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - BeatListener
+  - Music And Beat
   layers:
   - Default
   - TransparentFX
