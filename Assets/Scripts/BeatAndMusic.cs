@@ -15,7 +15,7 @@ public class BeatAndMusic : MonoBehaviour
     public float musicStartOffSet = 0f;
     float beatDuration;
     float beatTimer;
-    float VolumBias = 1f;
+    float VolumBias;
 
     public AudioSource player2D;
     public AudioSource player3D;
@@ -25,9 +25,11 @@ public class BeatAndMusic : MonoBehaviour
     void Start()
     {
         beatDuration = 1 / (BPM / 60);
+        VolumBias = 1f;
         player2D.volume = voulum;
         player3D.volume = 0;
         StartCoroutine(waiter());
+        StartCoroutine(Loop());
         player2D.PlayDelayed(musicStartOffSet);
         player3D.PlayDelayed(musicStartOffSet);
     }
@@ -47,6 +49,14 @@ public class BeatAndMusic : MonoBehaviour
         fade();
     }
 
+    IEnumerator Loop ()
+    {
+        yield return new WaitForSeconds((player3D.clip.length + player2D.clip.length) / 2f);
+        player3D.Play();
+        player2D.Play();
+        StartCoroutine(Loop());
+    }
+   
     IEnumerator waiter ()
     {
         yield return new WaitForSeconds(beatStartOffSet);
@@ -55,9 +65,8 @@ public class BeatAndMusic : MonoBehaviour
 
     IEnumerator beater()
     {
-        while(true)
+        while (true)
         {
-            yield return new WaitForSeconds(beatDuration);
             Debug.Log("beat start");
             GameObject[] BeatListers = GameObject.FindGameObjectsWithTag("BeatListener");
 
@@ -66,6 +75,7 @@ public class BeatAndMusic : MonoBehaviour
                 Debug.Log("beat sent:" + i);
                 BeatListers[i].SendMessage("Beat", SendMessageOptions.DontRequireReceiver);
             }
+            yield return new WaitForSeconds(beatDuration);
         }
     }
 
