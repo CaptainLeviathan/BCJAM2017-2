@@ -10,7 +10,7 @@ public class Player3 : MonoBehaviour {
     Vector3 position;
 
     //CameraAnimate cameraAnimate;
-
+    
     public float speed = 2f;
     public float slideSpeed = 2f;
     public float jumpSpeed = 3f;
@@ -37,6 +37,10 @@ public class Player3 : MonoBehaviour {
     float score;
     float multTimer;
 
+    bool left;
+    bool right;
+    bool jump;
+
     bool isDead;
 
     MeshRenderer DTextRend;
@@ -44,6 +48,11 @@ public class Player3 : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+
+        left = false;
+        right = false;
+        jump = false;
+
         isDead = false;
 
         Dimension.set2D();
@@ -69,6 +78,10 @@ public class Player3 : MonoBehaviour {
         //setting our internal Vector 3 velocity to the Rigid Bodys velocity/tranform position for pass though and changes behavor
         velocity = rigBod.velocity;
         position = transform.position;
+
+        left = Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow); ;
+        right = Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow);
+        jump = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow);
 
         if (!isDead)
         {
@@ -115,7 +128,7 @@ public class Player3 : MonoBehaviour {
     void update2D()
     {
         //jump implementation
-        if (Input.GetKeyDown("space") && isGrounded())
+        if (jump && isGrounded())
         {
             velocity.y = jumpSpeed;
             print("jump");
@@ -128,7 +141,7 @@ public class Player3 : MonoBehaviour {
         //slide to right
         if (transform.position.z >= -slideBounds)
         {
-            if (Input.GetKey("d"))
+            if (right)
             {
                 velocity.z = -slideSpeed;
             }
@@ -141,7 +154,7 @@ public class Player3 : MonoBehaviour {
         //slide to left
         if (transform.position.z <= slideBounds)
         {
-            if (Input.GetKey("a"))
+            if (left)
             {
                 velocity.z = slideSpeed;
             }
@@ -152,7 +165,7 @@ public class Player3 : MonoBehaviour {
         }
 
 
-        if ((!Input.GetKey("d") && !Input.GetKey("a")) || (Input.GetKey("d") && Input.GetKey("a")))
+        if ((!right && !left) || (right && left))
         {
             velocity.z = 0;
         }
@@ -164,7 +177,8 @@ public class Player3 : MonoBehaviour {
 
      public void start3D()
     {
-        //Centering us
+        //moving us back
+        position = transform.position;
         print("start3D");
         position.z = oldZ;
         transform.position = position;
@@ -174,6 +188,8 @@ public class Player3 : MonoBehaviour {
     {
         //locking us for 2d
         print("end2D");
+        position = transform.position;
+        velocity = rigBod.velocity;
         position.z = -slideBounds;
         velocity.z = 0f;
         rigBod.velocity = velocity;
