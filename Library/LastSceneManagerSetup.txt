@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/Public/Documents/Unity Projects/test conspept/Assets/Prototype.unity
+- path: Assets/Scenes/JoshBox.unity
   isLoaded: 1
   isActive: 1
