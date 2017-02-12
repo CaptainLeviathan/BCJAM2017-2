@@ -175,6 +175,8 @@ public class Player3 : MonoBehaviour {
         //locking us for 2d
         print("end2D");
         position.z = -slideBounds;
+        velocity.z = 0f;
+        rigBod.velocity = velocity;
         transform.position = position;
     }
 
