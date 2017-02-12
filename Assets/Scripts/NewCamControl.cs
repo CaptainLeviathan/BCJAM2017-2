@@ -40,7 +40,7 @@ public class NewCamControl : MonoBehaviour
         if (in2D && pushButt)
         {
             Debug.Log("starting 2D to 3D switch");
-            player.SendMessage("start3D");
+            player.BroadcastMessage("start3D");
             switch3D();
         }
 
@@ -76,7 +76,7 @@ public class NewCamControl : MonoBehaviour
         if (targetAngle == orbitAmount)
         {
             Dimension.set2D();
-            player.SendMessage("end2D");
+            player.BroadcastMessage("end2D");
             Debug.Log("now in 2D");
         }
 
