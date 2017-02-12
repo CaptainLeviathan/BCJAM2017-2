@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4782615614923242}
   - component: {fileID: 54466598121140264}
   - component: {fileID: 65730588568935766}
-  - component: {fileID: 114109635540893730}
+  - component: {fileID: 114366032802686188}
   m_Layer: 0
   m_Name: FallingObject4h
   m_TagString: Untagged
@@ -233,7 +233,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 5, z: 22}
   m_Center: {x: -5, y: 2.5, z: -1}
---- !u!114 &114109635540893730
+--- !u!114 &114366032802686188
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -241,6 +241,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1693731072608284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0956ab08a2df6cc4294e9751230e3dd8, type: 3}
+  m_Script: {fileID: 11500000, guid: ce60a0061af26c241b30bf6ff5ed54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

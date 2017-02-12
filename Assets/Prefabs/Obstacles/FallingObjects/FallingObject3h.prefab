@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4579300959402070}
   - component: {fileID: 54404843052673902}
   - component: {fileID: 65756586197297690}
-  - component: {fileID: 114339138211274852}
+  - component: {fileID: 114049577430836510}
   m_Layer: 0
   m_Name: FallingObject3h
-  m_TagString: FallingObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 23152478244005200}
   m_Layer: 0
   m_Name: 2D
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 23030425088961574}
   m_Layer: 0
   m_Name: 3D
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,9 +193,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!65 &65156981010394582
 BoxCollider:
@@ -233,7 +233,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 5, z: 22}
   m_Center: {x: -5, y: 2.5, z: -1}
---- !u!114 &114339138211274852
+--- !u!114 &114049577430836510
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -241,6 +241,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109765757776240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0956ab08a2df6cc4294e9751230e3dd8, type: 3}
+  m_Script: {fileID: 11500000, guid: ce60a0061af26c241b30bf6ff5ed54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
