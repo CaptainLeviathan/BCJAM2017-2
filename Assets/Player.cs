@@ -51,7 +51,7 @@ public class Player : MonoBehaviour {
         }
 
         //making us move foward
-        velocity.x = speed;
+        velocity.x = speed * Time.deltaTime * 60f;
 
         transform.position = position;
         rigBod.velocity = velocity;
